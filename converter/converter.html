@@ -1,0 +1,564 @@
+<html>
+<head>
+	<title>converter</title>	
+</head>
+<style>
+	body
+	{
+		background-image: url("bg.jpg");
+		background-size: 100% 165%;
+		background-repeat: no-repeat;
+		color: white;
+
+	}
+	#full
+	{
+		height:78%;
+		width:30%;
+		background-image: url("full2.jpg");
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+		border:10px outset grey;
+		padding:4% 0px 0% 3%;
+		margin: 0 auto;
+		margin-top: 2%;
+		 -webkit-box-reflect: below 0px bottom, rgba(255, 255, 255, 0.3) 0%, black 50%, black 100%;
+		font-size: 18px;
+	}
+	input
+	{
+		height:10%;
+		width:90%;
+		border-radius: 10px;
+		margin-top: 15px;
+		margin-bottom: 8px;
+		outline: none;
+		font-size: 18px;
+		border:2px ridge grey;
+	}
+	select
+	{
+		height:10%;
+		width:90%;
+		border-radius: 10px;
+		margin-top: 15px;
+		outline: none;
+		font-size: 18px;
+		border:2px ridge grey;
+		margin-bottom: 10px;
+	}
+	button
+	{
+		height:10%;
+		width:25%;
+		margin-top: 15px;
+		margin-bottom: 10px;
+		border:2px ridge grey;
+		margin-left: 10px;
+		outline: none;
+		background-color: white;
+		font-size: 18px;
+		box-shadow: 0px 0px 10px 0px grey;
+		border-radius: 15px;
+	}
+	button:active
+	{
+		box-shadow: none;
+		background-color: grey;
+		color: black;
+	}
+	textarea
+	{
+
+		height:20%;
+		font-size: 18px;
+		border-radius: 15px;
+		width:90%;
+		margin-top: 15px;
+		outline: none;
+		margin-bottom: 20px;
+		border:2px ridge grey;
+	}
+
+</style>
+<body>
+	<div id="full">
+		<form onsubmit="return false">
+		<!-- <video height="200%" width="100%" controls><source src="back.mp4"></video> -->
+		Number:<br>
+		<input type="text" id="num" oninput="fun()"><br>
+		From Base:
+		<br> 
+		<select class="choose" id="from">
+			<option value="16">16(hex)</option>
+			<option value="2">2(binary)</option>
+			<option value="10">10(decimal)</option>
+			<option value="8">8(octal)</option>
+		</select><br>
+		To Base:
+		<br>
+		<select class="choose" id="to">
+			<option  value="16">16(hex)</option>
+			<option value="2">2(binary)</option>
+			<option value="10">10(decimal)</option>
+			<option value="8">8(octal)</option>
+		</select>
+		<br>
+		<button onclick="a()">convert</button>
+		<button type="reset" value="reset">Reset</button>
+		<textarea readonly="" id="display"></textarea>
+	</form>
+	</div>
+</body>
+</html>
+<script>
+	 var fbase=0,tbase=0,m=0,ans=0,n=0,i=0;
+	 var b = [];
+	 var v=0;
+	function fun()
+	{ 
+		n = parseInt(document.getElementById("num").value);
+		console.log(n);
+	}
+	
+	 function a()
+	 {
+	 	fbase=document.getElementById('from').value;
+	 	console.log(document.getElementById('from').value);
+	 	console.log(fbase);
+	 	tbase=document.getElementById('to').value;
+	 	console.log(document.getElementById('to').value);
+	 	console.log(tbase);
+
+	 	switch(fbase)
+		{
+			case'10':
+					console.log(fbase);
+					switch(tbase)
+					{
+						case'2':console.log(tbase);
+								while(n>=1)
+								{
+									m=parseInt(n%2);
+									n=parseInt(n/2);
+									console.log(m);
+									console.log(n);
+									document.getElementById("display").value += m;
+									ans=document.getElementById("display").value;
+									console.log(document.getElementById("display").value);
+								}
+								ans = ans.split('');
+								console.log(ans)
+								ans = ans.reverse();
+								ans = ans.join('')
+	 							document.getElementById("display").value=ans;
+	 							console.log(ans);
+
+						break;
+						case'8':console.log(tbase);
+								while(n>=1)
+								{
+									console.log(m);
+									console.log(n);
+									m=parseInt(n%8);
+									n=parseInt(n/8);
+									console.log(m);
+									console.log(n);
+									document.getElementById("display").value += m;
+									ans=document.getElementById("display").value;
+									console.log(document.getElementById("display").value);
+								}
+								ans = ans.split('');
+								console.log(ans)
+								ans = ans.reverse();
+								ans = ans.join('')
+	 							document.getElementById("display").value=ans;
+	 							console.log(ans);
+						break;
+						case'10':console.log(tbase);
+								document.getElementById("display").value=n;
+								ans=document.getElementById("display").value;
+								console.log(document.getElementById("display").value);
+								ans = ans.split('');
+								console.log(ans)
+								ans = ans.reverse();
+								ans = ans.join('')
+	 							document.getElementById("display").value=ans;
+	 							console.log(ans);
+						break;
+						case'16':console.log(tbase);
+
+
+								while(n>=1)
+								{
+									console.log(m);
+									console.log(n);
+									m=parseInt(n%16);
+									if(m>=10)
+									{
+										  m=m+55;
+										  m = String.fromCharCode(m);
+											console.log(String.fromCharCode(m));
+									}
+									n=parseInt(n/16);
+									console.log(String.fromCharCode(m));
+									console.log(n);
+									document.getElementById("display").value += m;
+									ans=document.getElementById("display").value;
+									console.log(document.getElementById("display").value);
+								}
+								ans = ans.split('');
+								console.log(ans)
+								ans = ans.reverse();
+								ans = ans.join('')
+	 							document.getElementById("display").value=ans;
+	 							console.log(ans);
+						break;
+
+					}			
+			break;
+			case'2':
+					console.log(fbase);
+					/*m=0,ans=0;*/
+					switch(tbase)
+					{
+						case'10':
+								console.log(n);
+								console.log(m);
+								var s = n+'';
+								m = s.split('');
+								console.log(m);
+								for(var i=(m.length-1);i>=0;i--)
+								{
+						 			if(m[i]==1)
+									{
+										m[i]=Math.pow(2,m.length - 1 - i);
+										ans=m[i]+ans;
+										console.log(m[i])
+									}
+									else
+									{
+										m[i]=0;
+									}
+								}
+								document.getElementById("display").value=ans;
+								break;
+
+						case'8':
+								var s = n+'';
+								console.log(s);
+								m = s.split('');
+								console.log(m);
+								var z = m.length/3;
+								console.log(z);
+								var p = m.length-1;
+								console.log(p);
+								for(i=z;i>0;i--)
+								{
+									ans=0;
+									for(j=0;j<=2;j++)
+									{
+										if(m[p]==1)
+										{
+											m[p]=Math.pow(2,j);
+											ans=ans+m[p];
+											p--;
+										}
+										else
+										{
+											m[p]=0;
+											p--;
+										}	
+									}
+									b.push(ans);
+									z--;
+								}
+								b = b.reverse();
+								b = b.join('');
+								document.getElementById("display").value=b;
+								break;
+
+						case'16':
+								var s = n+'';
+								console.log(s);
+								m = s.split('');
+								console.log(m);
+								var z = m.length/4;
+								console.log(z);
+								var p = m.length-1;
+								console.log(p);
+								for(i=z;i>0;i--)
+								{
+									ans=0;
+									for(j=0;j<=3;j++)
+									{
+										if(m[p]==1)
+										{
+											m[p]=Math.pow(2,j);
+											ans=ans+m[p];
+											if(ans>=10)
+											{
+										  		ans=ans+55;
+										  		ans= String.fromCharCode(ans);
+												console.log(String.fromCharCode(ans));
+											}
+											p--;
+										}
+										else
+										{
+											m[p]=0;
+											p--;
+										}	
+									}
+									b.push(ans);
+									z--;
+								}
+								b = b.reverse();
+								b = b.join('');
+								document.getElementById("display").value=b;
+								break;
+
+						case'2':document.getElementById("display").value=n;
+								ans=document.getElementById("display").value;
+	 							document.getElementById("display").value=ans;
+	 							console.log(ans);
+	 							break;
+					}			
+			break;
+			case'8':
+					switch(tbase)
+					{
+						case'2':
+								var s = n+'';
+								console.log(s);
+								m = s.split('');
+								console.log(m);
+								for(i=m.length-1;i>=0;i--)
+								{
+									var no = m[i];
+									switch(no)
+									{
+										case'0':ans='000';
+												b.push(ans);
+												break;
+										case'1':ans='001';
+												b.push(ans);
+												break;
+										case'2':ans='010';
+												b.push(ans);
+												break;
+										case'3':ans='011';
+												b.push(ans);
+												break;
+										case'4':ans='100';
+												b.push(ans);
+												break;
+										case'5':ans='101';
+												b.push(ans);
+												break;
+										case'6':ans='110';
+												b.push(ans);
+												break;
+										case'7':ans='111';
+												b.push(ans);
+												break;
+									}									
+								}
+								b = b.reverse();
+								b = b.join('');
+								document.getElementById("display").value=b;
+						break;
+						case'8':
+								document.getElementById("display").value=n;
+								ans=document.getElementById("display").value;
+	 							document.getElementById("display").value=ans;
+	 							console.log(ans);
+	 							break;
+						case'10':console.log(n);
+								console.log(m);
+								var s = n+'';
+								m = s.split('');
+								console.log(m);
+								for(var i=(m.length-1);i>=0;i--)
+								{
+									console.log(i);
+						 			if(m[i]>=0&&m[i]<=7)
+									{
+										m[i]=m[i]*(Math.pow(8,m.length - 1 - i));
+										ans=m[i]+ans;
+										console.log(m[i]);
+									}
+									
+								}
+								document.getElementById("display").value=ans;
+								break;
+						case'16':
+								var s = n+'';
+								console.log(s);
+								m = s.split('');
+								console.log(m);
+								for(i=m.length-1;i>=0;i--)
+								{
+									var no = m[i];
+									switch(no)
+									{
+										case'0':ans='000';
+												b.push(ans);
+												break;
+										case'1':ans='001';
+												b.push(ans);
+												console.log(ans);
+												break;
+										case'2':ans='010';
+												b.push(ans);
+												console.log(ans);
+												break;
+										case'3':ans='011';
+												b.push(ans);
+												console.log(ans);
+												break;
+										case'4':ans='100';
+												b.push(ans);
+												break;
+										case'5':ans='101';
+												b.push(ans);
+												break;
+										case'6':ans='110';
+												b.push(ans);
+												break;
+										case'7':ans='111';
+												b.push(ans);
+												break;
+									}
+
+								}
+								console.log(ans);
+								b = b.reverse();
+								var string = b.join('');
+								console.log(string);
+								document.getElementById("display").value = string;
+								m=0;s=0;z=0;p=0;
+								var s = string+'';
+								console.log(s);
+								m = s.split('');
+								console.log(m);
+								var z = m.length/4;
+								console.log(z);
+								var p = m.length-1;
+								console.log(p);
+								b= [];i=0;
+								for(i=z;i>0;i--)
+								{
+									ans=0;
+									for(j=0;j<=3;j++)
+									{
+										if(m[p]==1)
+										{
+											m[p]=Math.pow(2,j);
+											ans=ans+m[p];
+											if(ans>=10)
+											{
+										  		ans=ans+55;
+										  		ans= String.fromCharCode(ans);
+												console.log(String.fromCharCode(ans));
+											}
+											p--;
+										}
+										else
+										{
+											m[p]=0;
+											p--;
+										}	
+									}
+									b.push(ans);
+									z--;
+								}
+								b = b.reverse();
+								b = b.join('');
+								document.getElementById("display").value=b;
+						break;
+					}
+			break;
+			case'16':
+					switch(tbase)
+					{
+						case'16':document.getElementById("display").value=n;
+								ans=document.getElementById("display").value;
+	 							document.getElementById("display").value=ans;
+	 							console.log(ans);
+	 							break;
+	 					case'10':console.log(n);
+	 							var v = document.getElementById("num").value;
+	 							console.log(v);
+								console.log(m);
+								var s=v+'';
+								m = s.split('');
+								console.log(m);
+								for( i=(m.length-1);i>=0;i--)
+								{
+									console.log(i);
+						 			if(m[i]>=0&&m[i]<=9)
+									{
+										m[i]=m[i]*(Math.pow(16,m.length - 1 - i));
+										ans=m[i]+ans;
+										console.log(m[i]);
+									}
+									if(m[i]=='A'||m[i]=='B'||m[i]=='C'||m[i]=='D'||m[i]=='E'||m[i]=='F')
+									{
+										switch(m[i])
+										{
+											case'A':m[i]=10;
+													m[i]=m[i]*(Math.pow(16,m.length-1-i));
+													ans=m[i]+ans;
+													console.log(m[i]);
+													break;
+											case'B':m[i]=11;
+													m[i]=m[i]*(Math.pow(16,m.length - 1 - i));
+													ans=m[i] + ans;
+													console.log(m[i]);
+													break;
+											case'C':m[i]=12;
+													m[i]=m[i]*(Math.pow(16,m.length - 1 - i));
+													ans=m[i]+ans;
+													console.log(m[i]);
+													break;
+											case'D':m[i]=13;
+													m[i]=m[i]*(Math.pow(16,m.length - 1 - i));
+													ans=m[i]+ans;
+													console.log(m[i]);
+													break;
+											case'E':m[i]=14;
+													m[i]=m[i]*(Math.pow(16,m.length - 1 - i));
+													ans=m[i]+ans;
+													console.log(m[i]);
+													break;
+											case'F':m[i]=15;
+													m[i]=m[i]*(Math.pow(16,m.length - 1 - i));
+													ans=m[i]+ans;
+													console.log(m[i]);
+													break;	
+										}
+									}
+									
+								}
+								document.getElementById("display").value=ans;
+								break;
+						case'2':console.log(tbase);
+								n=document.getElementById("num").value;
+								b=parseInt(n,16).toString(2);
+								console.log(b);
+								document.getElementById("display").value=b;
+								break;
+						case'8':ans=0;
+								n = document.getElementById("num").value;
+								b=parseInt(n,16).toString(8);
+								document.getElementById("display").value=b;
+								break;
+					}
+			
+		}
+		
+	 }
+	 
+	
+</script>
